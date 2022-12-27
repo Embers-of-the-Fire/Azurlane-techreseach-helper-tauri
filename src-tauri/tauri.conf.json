@@ -7,7 +7,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "tauri-app",
+    "productName": "Azurlane Tech Research Helper - Tauri",
     "version": "0.0.0"
   },
   "tauri": {
