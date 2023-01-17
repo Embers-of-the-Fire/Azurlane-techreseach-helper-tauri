@@ -23,7 +23,7 @@ npm install --save
 安装`React`项目相关依赖。然后：
 
 ```batch
-cargo install create-tauri-app
+cargo install tauri-cli
 ```
 
 安装`tauri`相关依赖。
