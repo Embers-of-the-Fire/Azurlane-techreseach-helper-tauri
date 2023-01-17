@@ -167,7 +167,7 @@ class App extends React.Component {
                             <Layout.Footer
                                 style={{
                                     textAlign: "center",
-                                    marginBottom: "-20px",
+                                    marginBottom: "-25px",
                                 }}
                             >
                                 UI Supported By{" "}
@@ -175,6 +175,15 @@ class App extends React.Component {
                                 <br />
                                 App Supported By{" "}
                                 <a href="https://tauri.app/">Tauri</a>
+                                <br />
+                                Author -{" "}
+                                <a href="https://github.com/Embers-of-the-Fire/">
+                                    Embers-of-the-Fire(GitHub)
+                                </a>{" "}
+                                -{" "}
+                                <a href="https://space.bilibili.com/526159315">
+                                    统合部25000mm装甲附甲(BiliBili)
+                                </a>
                             </Layout.Footer>
                         </Layout>
                     </Layout>

@@ -3,9 +3,9 @@
     windows_subsystem = "windows"
 )]
 
-use std::rc::Rc;
+use std::{rc::Rc, sync::mpsc, thread};
 
-use dataset::PROJECT_NAME;
+use dataset::{ResearchDataCollection, PROJECT_NAME};
 use enum_val::{ReferVal, Strict};
 use node::meta::PerformanceMode;
 use serde::{Deserialize, Serialize};
@@ -74,6 +74,7 @@ struct InputMeta {
     learn2: f64,
     node_amo: usize,
     vmax: f64,
+    thread_amo: usize,
 }
 
 #[derive(Debug, Copy, Clone, Serialize, Deserialize)]
@@ -86,6 +87,7 @@ struct ResValue {
     ur_blp: f64,
     direct_ur_blp: f64,
     cogn_chip: f64,
+    ur_equip: f64,
 }
 
 impl ResValue {
@@ -98,6 +100,7 @@ impl ResValue {
         ur_blp: f64,
         direct_ur_blp: f64,
         cogn_chip: f64,
+        ur_equip: f64,
     ) -> ResValue {
         ResValue {
             time,
@@ -108,6 +111,21 @@ impl ResValue {
             ur_blp,
             direct_ur_blp,
             cogn_chip,
+            ur_equip
+        }
+    }
+
+    pub fn empty() -> ResValue {
+        ResValue {
+            time: 0.0,
+            doubloon: 0.0,
+            cube: 0.0,
+            ssr_blp: 0.0,
+            direct_ssr_blp: 0.0,
+            ur_blp: 0.0,
+            direct_ur_blp: 0.0,
+            cogn_chip: 0.0,
+            ur_equip: 0.0
         }
     }
 }
@@ -125,6 +143,14 @@ impl OptResDataNode {
             select,
             index,
             name,
+        }
+    }
+
+    pub fn empty() -> OptResDataNode {
+        OptResDataNode {
+            select: false,
+            index: 0,
+            name: String::new(),
         }
     }
 }
@@ -298,6 +324,7 @@ impl OptResult {
             ave.ultra_rare_blp + ave.indirect_ur_blp,
             ave.ultra_rare_blp,
             ave.cognitive_chips,
+            ave.ultra_rare_equip,
         );
         let dlyr = ResValue::new(
             dly.research_time,
@@ -308,6 +335,7 @@ impl OptResult {
             dly.ultra_rare_blp + dly.indirect_ur_blp,
             dly.ultra_rare_blp,
             dly.cognitive_chips,
+            dly.ultra_rare_equip,
         );
         let annr = ResValue::new(
             dlyr.time * 365.0,
@@ -318,6 +346,7 @@ impl OptResult {
             dlyr.ur_blp * 365.0,
             dlyr.direct_ur_blp * 365.0,
             dlyr.cogn_chip * 365.0,
+            dlyr.ur_equip * 365.0,
         );
         OptResult {
             dataset: dresn,
@@ -326,15 +355,53 @@ impl OptResult {
             annual: annr,
         }
     }
+    pub fn empty() -> OptResult {
+        OptResult {
+            dataset: [
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+                OptResDataNode::empty(),
+            ],
+            average: ResValue::empty(),
+            daily: ResValue::empty(),
+            annual: ResValue::empty(),
+        }
+    }
 }
 
-#[tauri::command]
-async fn pso_plan(
+fn pso_handle(
     irefer: InputReference,
     irest: InputRestriction,
     imeta: InputMeta,
-) -> Result<OptResult, String> {
-    let research_data: dataset::ResearchDataCollection = dataset::ResearchDataCollection::load();
+    channel: mpsc::Sender<(f64, OptResult)>,
+) {
+    let research_data: ResearchDataCollection = ResearchDataCollection::load();
     let data_ptr = Rc::new(research_data);
     let resv = ResourceValue::new(
         irefer.doubloon,
@@ -375,7 +442,79 @@ async fn pso_plan(
         mode,
     );
     pso.generate();
-    Ok(OptResult::from(&pso.global_best.data, irest.limit as u8))
+    channel
+        .send((
+            pso.global_best.best_performance(),
+            OptResult::from(&pso.global_best.data, irest.limit as u8),
+        ))
+        .unwrap();
+}
+
+#[tauri::command]
+async fn pso_plan(
+    irefer: InputReference,
+    irest: InputRestriction,
+    imeta: InputMeta,
+) -> Result<OptResult, String> {
+    /* let resv = ResourceValue::new(
+        irefer.doubloon,
+        irefer.cube,
+        irefer.ssr_blp,
+        ReferVal::Value(irefer.ur_blp),
+        ReferVal::Value(irefer.ur_equip),
+        irefer.cogn_chip,
+        irest.finished_ur_ship as u8,
+        irest.finished_ssr_ship as u8,
+        irest.finished_former_ship as u8,
+    );
+    let rest = ResourceRestriction::new(
+        irest.doubloon.into_strict(),
+        irest.cube.into_strict(),
+        irest.ssr_blp.into_strict(),
+        irest.ur_blp.into_strict(),
+        irest.ur_equip.into_strict(),
+        irest.cogn_chip.into_strict(),
+        irest.time.into_strict(),
+        irest.limit as u8,
+    );
+    let mode = match irest.mode {
+        true => PerformanceMode::PureIncome,
+        false => PerformanceMode::CostPerformance,
+    };
+    let mut pso = PsoHandler::new(
+        imeta.node_amo,
+        imeta.generation,
+        resv,
+        rest,
+        imeta.learn1,
+        imeta.learn2,
+        imeta.inertia_s,
+        imeta.inertia_e,
+        Rc::clone(&data_ptr),
+        imeta.vmax,
+        mode,
+    );
+    pso.generate(); */
+    let (tx, rx) = mpsc::channel();
+    let mut v = Vec::new();
+    for _ in 0..imeta.thread_amo {
+        let ntx = tx.clone();
+        let t = thread::spawn(move || {
+            pso_handle(irefer, irest, imeta, ntx);
+        });
+        v.push(t);
+    }
+    drop(tx);
+    for i in v {
+        i.join().unwrap();
+    }
+    let mut vres = (0.0, OptResult::empty());
+    for vri in rx {
+        if vri.0 > vres.0 {
+            vres = vri
+        }
+    }
+    Ok(vres.1)
 }
 
 fn main() {

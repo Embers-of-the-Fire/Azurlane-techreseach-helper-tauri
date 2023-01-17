@@ -9,6 +9,7 @@ import {
     notification,
     Tour,
     Typography,
+    Modal,
 } from "antd";
 import {
     ExclamationCircleTwoTone,
@@ -34,6 +35,7 @@ class TechPlanBuilder extends React.Component {
             ur_blp: 0.0,
             direct_ur_blp: 0.0,
             cogn_chip: 0.0,
+            ur_equip: 0.0,
         };
         this.state = {
             dataset: new Array(29).fill(null).map((_, i) => {
@@ -49,13 +51,14 @@ class TechPlanBuilder extends React.Component {
             openTour: false,
             openDrawer: false,
             abr: {
-                generation: 1500,
+                generation: 1000,
                 learn1: 2.0,
                 learn2: 2.0,
                 inertia_s: 0.8,
                 inertia_e: 0.4,
-                node_amo: 50,
+                node_amo: 25,
                 vmax: 0.2,
+                thread_amo: 15
             },
         };
         props.onRef(this);
@@ -98,6 +101,41 @@ class TechPlanBuilder extends React.Component {
             placement: "top",
             icon: <ExclamationCircleTwoTone twoToneColor="#ff4d4f" />,
         });
+    }
+    modalInfo() {
+        Modal.info({
+            title: "提示",
+            content: (
+                <div>
+                    <p>应用目前处于测试阶段，如果出现问题请联系作者报告。</p>
+                    <p>该应用如果并发量、迭代数或粒子数过多，可能产生短时间较高的CPU占用。如果发现占用过高，可以尝试调低高级选项中的相关选项。</p>
+                    <p>
+                        联系方式:
+                        <br />
+                        &nbsp;&nbsp;QQ: 3562377918
+                        <br />
+                        &nbsp;&nbsp;BiliBili:&nbsp;
+                        <a href="https://space.bilibili.com/526159315">
+                            Bid:526159315
+                        </a>
+                        <br />
+                        &nbsp;&nbsp;Github:&nbsp;
+                        <a href="https://github.com/Embers-of-the-Fire/">
+                            GitHub User
+                        </a>&nbsp;||&nbsp;
+                        <a href="https://github.com/Embers-of-the-Fire/Azurlane-techreseach-helper-tauri">
+                            GitHub Repo
+                        </a>
+                    </p>
+                </div>
+            ),
+            onOk: () => {
+                this.startTour();
+            }
+        });
+    }
+    question() {
+        this.modalInfo();
     }
     closeTour() {
         this.setState({
@@ -219,7 +257,7 @@ class TechPlanBuilder extends React.Component {
                                     marginRight: "15px",
                                 }}
                                 icon={<QuestionCircleTwoTone />}
-                                onClick={() => this.startTour()}
+                                onClick={() => this.question()}
                             />
                             <ConfigProvider
                                 theme={{

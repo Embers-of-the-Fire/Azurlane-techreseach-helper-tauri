@@ -17,6 +17,9 @@ class Daily extends React.Component {
                     <Descriptions.Item label="消耗魔方">
                         {this.props.cube.toFixed(2)}
                     </Descriptions.Item>
+                    <Descriptions.Item label="产出心智碎片">
+                        {this.props.cogn_chip.toFixed(2)}
+                    </Descriptions.Item>
                     <Descriptions.Item label="产出金图">
                         {this.props.ssr_blp.toFixed(2)}
                     </Descriptions.Item>
@@ -35,8 +38,8 @@ class Daily extends React.Component {
                             2
                         )}
                     </Descriptions.Item>
-                    <Descriptions.Item label="产出心智碎片">
-                        {this.props.cogn_chip.toFixed(2)}
+                    <Descriptions.Item label="产出彩装" span={2}>
+                        {this.props.ur_equip.toFixed(2)}
                     </Descriptions.Item>
                 </Descriptions>
             </div>

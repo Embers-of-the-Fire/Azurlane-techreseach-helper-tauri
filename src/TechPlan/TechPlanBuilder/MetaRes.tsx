@@ -48,13 +48,14 @@ class MetaDrawer extends React.Component<Props> {
                     layout="horizontal"
                     autoComplete="off"
                     initialValues={this.props.defaultValue ? this.props.defaultValue : {
-                        generation: 1500,
+                        generation: 1000,
                         learn1: 2.0,
                         learn2: 2.0,
                         inertia_s: 0.8,
                         inertia_e: 0.4,
-                        node_amo: 50,
+                        node_amo: 25,
                         vmax: 0.2,
+                        thread_amo: 15
                     }}
                 >
                     <Form.Item name="generation" label="迭代次数" required={true}>
@@ -73,10 +74,13 @@ class MetaDrawer extends React.Component<Props> {
                         <InputNumber min={0} max={100} step={0.001} />
                     </Form.Item>
                     <Form.Item name="node_amo" label="粒子数量" required={true}>
-                        <InputNumber min={0} max={1000} step={1} />
+                        <InputNumber min={1} max={1000} step={1} />
                     </Form.Item>
                     <Form.Item name="vmax" label="最大速度" required={true}>
-                        <InputNumber min={0} max={10} step={0.001} />
+                        <InputNumber min={0.001} max={10} step={0.001} />
+                    </Form.Item>
+                    <Form.Item name="thread_amo" label="并行线程数" required={true}>
+                        <InputNumber min={1} max={100} step={1} />
                     </Form.Item>
                 </Form>
             </Drawer>
