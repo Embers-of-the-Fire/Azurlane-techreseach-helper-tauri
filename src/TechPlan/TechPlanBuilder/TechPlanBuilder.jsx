@@ -224,9 +224,11 @@ class TechPlanBuilder extends React.Component {
                     <div
                         style={{
                             height: "100%",
-                            padding: "10px",
+                            padding: "3px",
                             margin: "15px",
                             overflowY: "auto",
+                            border: "3px solid #d9d9d9",
+                            borderRadius: "5px",
                         }}
                     >
                         <div ref={this.tour.inputReferRef}>

@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Tech V3 App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 链接:  
+<https://pan.baidu.com/s/1gdTzn-3EOqdhZ6B_wRRp4A?pwd=q4p2> 提取码: q4p2 复制这段内容后打开百度网盘手机App，操作更方便哦
 
-## Available Scripts
+## 如何使用
 
-In the project directory, you can run:
+点击左下角问号按钮查看帮助
 
-### `npm start`
+## 本地编译
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+首先你需要安装[Nodejs](https://nodejs.org/)与[Rust](https://rust-lang.org)，并确认两个包管理器`npm`与`cargo`可以正常使用。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> 不会配置**NodeJs**请看这里：<https://www.runoob.com/nodejs/nodejs-npm.html>  
+> 不会配置**Rust**请看这里：<https://www.runoob.com/rust/rust-setup.html>
 
-### `npm test`
+随后进入根目录，打开命令提示符，如下操作：
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```batch
+npm install --save
+```
 
-### `npm run build`
+安装`React`项目相关依赖。然后：
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```batch
+cargo install create-tauri-app
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+安装`tauri`相关依赖。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+最后：
 
-### `npm run eject`
+```batch
+cargo tauri build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+进行编译。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+然后进入`./src-tauri/target/release/`获取应用程序，`./src-tauri/target/release/bundle`获取安装包。
