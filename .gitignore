@@ -25,3 +25,7 @@ yarn-error.log*
 .hintrc
 
 *.code-workspace
+
+# tauri
+
+/src-tauri/target/

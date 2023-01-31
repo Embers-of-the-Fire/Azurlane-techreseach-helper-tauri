@@ -83,6 +83,14 @@ impl ResearchData {
     pub fn is_research_assignment(&self) -> bool {
         return is_research_assignment(self.proj_type);
     }
+
+    pub fn is_ssr(&self) -> bool {
+        return is_ssr(self.proj_type);
+    }
+
+    pub fn is_ur(&self) -> bool {
+        return is_ur(self.proj_type);
+    }
 }
 
 

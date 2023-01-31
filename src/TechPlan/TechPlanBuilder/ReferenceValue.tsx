@@ -204,7 +204,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.doubloon}
-                        onChange={(value) => value!==null?this.setDoubloon(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setDoubloon(value) : null
+                        }
                     />
                     <Button
                         type="default"
@@ -222,7 +224,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.cube}
-                        onChange={(value) => value!==null?this.setCube(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setCube(value) : null
+                        }
                     />
                     <Button
                         type="default"
@@ -240,7 +244,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.ssr_blp}
-                        onChange={(value) => value!==null?this.setSsrBlp(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setSsrBlp(value) : null
+                        }
                     />
                     <Button
                         type="default"
@@ -268,7 +274,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.ur_blp.input}
-                        onChange={(value) => value!==null?this.setUrBlp(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setUrBlp(value) : null
+                        }
                     />
                     <Button
                         type="default"
@@ -296,7 +304,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.ur_equip.input}
-                        onChange={(value) => value!==null?this.setUrEquip(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setUrEquip(value) : null
+                        }
                     />
                     <Button
                         type="default"
@@ -314,7 +324,9 @@ class ReferenceValue extends React.Component<any, State> {
                         max={50000}
                         step={0.01}
                         value={this.state.cogn_chip}
-                        onChange={(value) => value!==null?this.setCognChip(value):null}
+                        onChange={(value) =>
+                            value !== null ? this.setCognChip(value) : null
+                        }
                     />
                     <Button
                         type="default"

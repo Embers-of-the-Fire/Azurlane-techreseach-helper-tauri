@@ -11,7 +11,18 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "fs": {
+        "exists": true,
+        "readDir": true,
+        "readFile": true,
+        "writeFile": true,
+        "scope": [
+          "$DESKTOP/*"
+        ]
+      },
+      "path": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,

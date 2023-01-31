@@ -496,7 +496,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.doubloon.status}
                         value={this.state.doubloon.value}
-                        onChange={(value) => value !== null ? this.setDoubloon(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setDoubloon(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -530,7 +532,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.cube.status}
                         value={this.state.cube.value}
-                        onChange={(value) => value !== null ? this.setCube(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setCube(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -566,7 +570,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.ssr_blp.status}
                         value={this.state.ssr_blp.value}
-                        onChange={(value) => value !== null ? this.setSsrBlp(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setSsrBlp(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -600,7 +606,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.ur_blp.status}
                         value={this.state.ur_blp.value}
-                        onChange={(value) => value !== null ? this.setUrBlp(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setUrBlp(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -636,7 +644,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.ur_equip.status}
                         value={this.state.ur_equip.value}
-                        onChange={(value) => value !== null ? this.setUrEquip(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setUrEquip(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -672,7 +682,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.cogn_chip.status}
                         value={this.state.cogn_chip.value}
-                        onChange={(value) => value !== null ? this.setCognChip(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setCognChip(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -708,7 +720,9 @@ class Restriction extends React.Component<{}, State> {
                         step={0.01}
                         disabled={!this.state.time.status}
                         value={this.state.time.value}
-                        onChange={(value) => value !== null ? this.setTimeLimit(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setTimeLimit(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -720,7 +734,9 @@ class Restriction extends React.Component<{}, State> {
                         defaultValue={10}
                         step={1}
                         value={this.state.limit}
-                        onChange={(value) => value !== null ? this.setLimit(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setLimit(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -732,7 +748,9 @@ class Restriction extends React.Component<{}, State> {
                         defaultValue={10}
                         step={1}
                         value={this.state.finished_former_ship}
-                        onChange={(value) => value !== null ? this.setFormerShip(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setFormerShip(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -744,7 +762,9 @@ class Restriction extends React.Component<{}, State> {
                         defaultValue={3}
                         step={1}
                         value={this.state.finished_ssr_ship}
-                        onChange={(value) => value !== null ? this.setSsrShip(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setSsrShip(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>
@@ -756,7 +776,9 @@ class Restriction extends React.Component<{}, State> {
                         defaultValue={2}
                         step={1}
                         value={this.state.finished_ur_ship}
-                        onChange={(value) => value !== null ? this.setUrShip(value) : null}
+                        onChange={(value) =>
+                            value !== null ? this.setUrShip(value) : null
+                        }
                     />
                 </Space.Compact>
                 <Space.Compact block>

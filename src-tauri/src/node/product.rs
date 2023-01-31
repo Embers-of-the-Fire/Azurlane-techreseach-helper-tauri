@@ -36,10 +36,13 @@ impl ProductNode {
             ultra_rare_equip: 0.0,
             cognitive_chips: 0.0,
             time: 0.0,
-            is_direct: match data_ptr.get_data_by_id(id as usize){
+            is_direct: match data_ptr.get_data_by_id(id as usize) {
                 Some(v) => v.is_direct_blp(),
-                None => {println!("{}", id);Option::None.unwrap()}
-            }
+                None => {
+                    println!("{}", id);
+                    Option::None.unwrap()
+                }
+            },
         }
     }
 
@@ -263,7 +266,7 @@ impl ProductMeta {
         for i in 0..29 {
             let rate = rates.nodes[i];
             self.nodes[i].set_rate(rate.actual_rate).generate();
-        };
+        }
         self.average = ProductAverage::from(&self.nodes);
         self.per_day = ProductPerDay::from(&self.average);
         self

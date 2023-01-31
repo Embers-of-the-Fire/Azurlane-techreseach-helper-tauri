@@ -1,4 +1,4 @@
-function toPercent(value: number, fix: number) {
+const toPercent = (value: number, fix: number): string =>  {
     if (!value) {
         value = 0.0
     }
@@ -7,4 +7,17 @@ function toPercent(value: number, fix: number) {
     return percent;
 }
 
-export default toPercent;
+interface ResProps {
+    style?: React.CSSProperties;
+    time: number;
+    doubloon: number;
+    cube: number;
+    cogn_chip: number;
+    ssr_blp: number;
+    direct_ssr_blp: number;
+    ur_blp: number;
+    direct_ur_blp: number;
+    ur_equip: number;
+}
+
+export { toPercent, ResProps };

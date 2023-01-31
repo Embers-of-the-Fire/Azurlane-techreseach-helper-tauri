@@ -1,18 +1,21 @@
 //! Solution using `PSO` method. See [PSO documentation](https://blog.csdn.net/qq_44186838/article/details/109212631)
 
-use std::{sync::mpsc, rc::Rc, thread};
+use std::{rc::Rc, sync::mpsc, thread};
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use crate::{enum_val::{Strict, ReferVal}, dataset::{PROJECT_NAME, ResearchDataCollection}, value::{resource_value::ResourceValue, restriction::ResourceRestriction}, node::meta::PerformanceMode};
+use crate::{
+    dataset::{ResearchDataCollection, PROJECT_NAME},
+    enum_val::{ReferVal, Strict},
+    node::meta::PerformanceMode,
+    value::{resource_value::ResourceValue, restriction::ResourceRestriction},
+};
 
-use self::pso::{PsoHandler, DataNode};
+use self::pso::{DataNode, PsoHandler};
 
-pub mod pso_coef;
 pub mod error;
 pub mod pso;
-
-
+pub mod pso_coef;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct InputReference {
@@ -106,7 +109,7 @@ impl ResValue {
             ur_blp,
             direct_ur_blp,
             cogn_chip,
-            ur_equip
+            ur_equip,
         }
     }
 
@@ -120,7 +123,7 @@ impl ResValue {
             ur_blp: 0.0,
             direct_ur_blp: 0.0,
             cogn_chip: 0.0,
-            ur_equip: 0.0
+            ur_equip: 0.0,
         }
     }
 }
@@ -128,14 +131,16 @@ impl ResValue {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptResDataNode {
     select: bool,
+    id: usize,
     index: usize,
     name: String,
 }
 
 impl OptResDataNode {
-    pub fn new(select: bool, index: usize, name: String) -> OptResDataNode {
+    pub fn new(limit: usize, index: usize, id: usize, name: String) -> OptResDataNode {
         OptResDataNode {
-            select,
+            select: index < limit,
+            id,
             index,
             name,
         }
@@ -144,6 +149,7 @@ impl OptResDataNode {
     pub fn empty() -> OptResDataNode {
         OptResDataNode {
             select: false,
+            id: 0,
             index: 0,
             name: String::new(),
         }
@@ -161,154 +167,38 @@ pub struct OptResult {
 impl OptResult {
     pub fn from(data: &DataNode, limit: u8) -> OptResult {
         let dsl = data.position;
-        let dresn = [
-            OptResDataNode::new(
-                dsl[0] < limit,
-                1,
-                String::from(PROJECT_NAME[dsl[0] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[1] < limit,
-                2,
-                String::from(PROJECT_NAME[dsl[1] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[2] < limit,
-                3,
-                String::from(PROJECT_NAME[dsl[2] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[3] < limit,
-                4,
-                String::from(PROJECT_NAME[dsl[3] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[4] < limit,
-                5,
-                String::from(PROJECT_NAME[dsl[4] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[5] < limit,
-                6,
-                String::from(PROJECT_NAME[dsl[5] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[6] < limit,
-                7,
-                String::from(PROJECT_NAME[dsl[6] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[7] < limit,
-                8,
-                String::from(PROJECT_NAME[dsl[7] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[8] < limit,
-                9,
-                String::from(PROJECT_NAME[dsl[8] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[9] < limit,
-                10,
-                String::from(PROJECT_NAME[dsl[9] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[10] < limit,
-                11,
-                String::from(PROJECT_NAME[dsl[10] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[11] < limit,
-                12,
-                String::from(PROJECT_NAME[dsl[11] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[12] < limit,
-                13,
-                String::from(PROJECT_NAME[dsl[12] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[13] < limit,
-                14,
-                String::from(PROJECT_NAME[dsl[13] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[14] < limit,
-                15,
-                String::from(PROJECT_NAME[dsl[14] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[15] < limit,
-                16,
-                String::from(PROJECT_NAME[dsl[15] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[16] < limit,
-                17,
-                String::from(PROJECT_NAME[dsl[16] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[17] < limit,
-                18,
-                String::from(PROJECT_NAME[dsl[17] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[18] < limit,
-                19,
-                String::from(PROJECT_NAME[dsl[18] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[19] < limit,
-                20,
-                String::from(PROJECT_NAME[dsl[19] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[20] < limit,
-                21,
-                String::from(PROJECT_NAME[dsl[20] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[21] < limit,
-                22,
-                String::from(PROJECT_NAME[dsl[21] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[22] < limit,
-                23,
-                String::from(PROJECT_NAME[dsl[22] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[23] < limit,
-                24,
-                String::from(PROJECT_NAME[dsl[23] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[24] < limit,
-                25,
-                String::from(PROJECT_NAME[dsl[24] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[25] < limit,
-                26,
-                String::from(PROJECT_NAME[dsl[25] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[26] < limit,
-                27,
-                String::from(PROJECT_NAME[dsl[26] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[27] < limit,
-                28,
-                String::from(PROJECT_NAME[dsl[27] as usize]),
-            ),
-            OptResDataNode::new(
-                dsl[28] < limit,
-                29,
-                String::from(PROJECT_NAME[dsl[28] as usize]),
-            ),
-        ];
+        let mut dresn = [OptResDataNode::new(limit as usize, 0 as usize, dsl[0] as usize, String::from(PROJECT_NAME[dsl[0] as usize]),),
+        OptResDataNode::new(limit as usize, 1 as usize, dsl[1] as usize, String::from(PROJECT_NAME[dsl[1] as usize]),),
+        OptResDataNode::new(limit as usize, 2 as usize, dsl[2] as usize, String::from(PROJECT_NAME[dsl[2] as usize]),),
+        OptResDataNode::new(limit as usize, 3 as usize, dsl[3] as usize, String::from(PROJECT_NAME[dsl[3] as usize]),),
+        OptResDataNode::new(limit as usize, 4 as usize, dsl[4] as usize, String::from(PROJECT_NAME[dsl[4] as usize]),),
+        OptResDataNode::new(limit as usize, 5 as usize, dsl[5] as usize, String::from(PROJECT_NAME[dsl[5] as usize]),),
+        OptResDataNode::new(limit as usize, 6 as usize, dsl[6] as usize, String::from(PROJECT_NAME[dsl[6] as usize]),),
+        OptResDataNode::new(limit as usize, 7 as usize, dsl[7] as usize, String::from(PROJECT_NAME[dsl[7] as usize]),),
+        OptResDataNode::new(limit as usize, 8 as usize, dsl[8] as usize, String::from(PROJECT_NAME[dsl[8] as usize]),),
+        OptResDataNode::new(limit as usize, 9 as usize, dsl[9] as usize, String::from(PROJECT_NAME[dsl[9] as usize]),),
+        OptResDataNode::new(limit as usize, 10 as usize, dsl[10] as usize, String::from(PROJECT_NAME[dsl[10] as usize]),),
+        OptResDataNode::new(limit as usize, 11 as usize, dsl[11] as usize, String::from(PROJECT_NAME[dsl[11] as usize]),),
+        OptResDataNode::new(limit as usize, 12 as usize, dsl[12] as usize, String::from(PROJECT_NAME[dsl[12] as usize]),),
+        OptResDataNode::new(limit as usize, 13 as usize, dsl[13] as usize, String::from(PROJECT_NAME[dsl[13] as usize]),),
+        OptResDataNode::new(limit as usize, 14 as usize, dsl[14] as usize, String::from(PROJECT_NAME[dsl[14] as usize]),),
+        OptResDataNode::new(limit as usize, 15 as usize, dsl[15] as usize, String::from(PROJECT_NAME[dsl[15] as usize]),),
+        OptResDataNode::new(limit as usize, 16 as usize, dsl[16] as usize, String::from(PROJECT_NAME[dsl[16] as usize]),),
+        OptResDataNode::new(limit as usize, 17 as usize, dsl[17] as usize, String::from(PROJECT_NAME[dsl[17] as usize]),),
+        OptResDataNode::new(limit as usize, 18 as usize, dsl[18] as usize, String::from(PROJECT_NAME[dsl[18] as usize]),),
+        OptResDataNode::new(limit as usize, 19 as usize, dsl[19] as usize, String::from(PROJECT_NAME[dsl[19] as usize]),),
+        OptResDataNode::new(limit as usize, 20 as usize, dsl[20] as usize, String::from(PROJECT_NAME[dsl[20] as usize]),),
+        OptResDataNode::new(limit as usize, 21 as usize, dsl[21] as usize, String::from(PROJECT_NAME[dsl[21] as usize]),),
+        OptResDataNode::new(limit as usize, 22 as usize, dsl[22] as usize, String::from(PROJECT_NAME[dsl[22] as usize]),),
+        OptResDataNode::new(limit as usize, 23 as usize, dsl[23] as usize, String::from(PROJECT_NAME[dsl[23] as usize]),),
+        OptResDataNode::new(limit as usize, 24 as usize, dsl[24] as usize, String::from(PROJECT_NAME[dsl[24] as usize]),),
+        OptResDataNode::new(limit as usize, 25 as usize, dsl[25] as usize, String::from(PROJECT_NAME[dsl[25] as usize]),),
+        OptResDataNode::new(limit as usize, 26 as usize, dsl[26] as usize, String::from(PROJECT_NAME[dsl[26] as usize]),),
+        OptResDataNode::new(limit as usize, 27 as usize, dsl[27] as usize, String::from(PROJECT_NAME[dsl[27] as usize]),),
+        OptResDataNode::new(limit as usize, 28 as usize, dsl[28] as usize, String::from(PROJECT_NAME[dsl[28] as usize]),)];
+        dresn.sort_by(|a, b| a.index.cmp(&b.index));
         let ave = data.data.product.average;
+        // println!("{:?}", ave);
         let dly = data.data.product.per_day;
         let aver = ResValue::new(
             ave.average_time,

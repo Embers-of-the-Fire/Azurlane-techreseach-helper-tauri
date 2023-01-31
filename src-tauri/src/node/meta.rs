@@ -2,8 +2,8 @@
 
 use std::rc::Rc;
 
-use crate::{dataset, value, strict_check_larger, strict_check_smaller};
 use crate::enum_val::Strict;
+use crate::{dataset, strict_check_larger, strict_check_smaller, value};
 
 use crate::dataset::PROJECT_ID;
 
@@ -99,14 +99,37 @@ impl Metaperformance {
         let mut ulim = false;
         let mut mcost = 0.0;
         let mut mincome = 0.0;
-        mcost += strict_check_larger!(ppd.doubloon * resv.doubloon, rest.doubloon, ppd.doubloon, ulim);
+        mcost += strict_check_larger!(
+            ppd.doubloon * resv.doubloon,
+            rest.doubloon,
+            ppd.doubloon,
+            ulim
+        );
         mcost += strict_check_larger!(ppd.cube * resv.cube, rest.cube, ppd.cube, ulim);
-        mincome += strict_check_smaller!(ppd.super_rare_blp * resv.ssr_blp, rest.ssr_blp, ppd.super_rare_blp + ppd.indirect_ssr_blp, ulim);
-        mincome += strict_check_smaller!(ppd.ultra_rare_blp * resv.ur_blp, rest.ur_blp, ppd.ultra_rare_blp + ppd.indirect_ur_blp, ulim);
-        mincome += strict_check_smaller!(ppd.ultra_rare_equip * resv.ur_equip, rest.ur_equip, ppd.ultra_rare_equip, ulim);
+        mincome += strict_check_smaller!(
+            ppd.super_rare_blp * resv.ssr_blp,
+            rest.ssr_blp,
+            ppd.super_rare_blp + ppd.indirect_ssr_blp,
+            ulim
+        );
+        mincome += strict_check_smaller!(
+            ppd.ultra_rare_blp * resv.ur_blp,
+            rest.ur_blp,
+            ppd.ultra_rare_blp + ppd.indirect_ur_blp,
+            ulim
+        );
+        mincome += strict_check_smaller!(
+            ppd.ultra_rare_equip * resv.ur_equip,
+            rest.ur_equip,
+            ppd.ultra_rare_equip,
+            ulim
+        );
         mincome += ppd.indirect_ssr_blp * resv.indirect_ssr_blp;
         mincome += ppd.indirect_ur_blp * resv.indirect_ur_blp;
-        if ulim == true { mcost = 0.0; mincome = 0.0; };
+        if ulim == true {
+            mcost = 0.0;
+            mincome = 0.0;
+        };
         self.modified_cost = mcost;
         self.modified_income = mincome;
         self.modified_cost_performance = self.modified_income / self.modified_cost;
@@ -141,18 +164,19 @@ impl MetaData {
     pub fn empty(ptr: Rc<dataset::ResearchDataCollection>, mode: PerformanceMode) -> MetaData {
         MetaData {
             product: product::ProductMeta::new(PROJECT_ID, Rc::clone(&ptr)),
-            rate: rate::RateMeta::new(PROJECT_ID, Rc::clone(&ptr), 1.0, &1),
+            rate: rate::RateMeta::new(PROJECT_ID, Rc::clone(&ptr), 1.0, 1.0, 1.0, &1),
             performance: Metaperformance::empty(mode),
             mode: PerformanceMode::PureIncome,
         }
     }
 
-    
     pub fn new(
         data: [u8; 29],
         data_ptr: Rc<dataset::ResearchDataCollection>,
-        resource_value: &value::resource_value::ResourceValue,
-        restriction: &value::restriction::ResourceRestriction,
+        rate_factor: f64,
+        source_rate_factor_ssr: f64,
+        source_rate_factor_ur: f64,
+        select_limit: &u8,
         mode: PerformanceMode,
     ) -> MetaData {
         MetaData {
@@ -160,22 +184,27 @@ impl MetaData {
             rate: rate::RateMeta::new(
                 data.clone(),
                 Rc::clone(&data_ptr),
-                resource_value.rate_factor,
-                &restriction.select,
+                rate_factor,
+                source_rate_factor_ssr,
+                source_rate_factor_ur,
+                select_limit,
             ),
             performance: Metaperformance::empty(mode),
             mode,
         }
     }
 
-    
     pub fn generate(&mut self) -> &mut Self {
         self.rate.generate();
         self.product.produce(&self.rate);
         self
     }
 
-    pub fn cost(&mut self, resource_value: &value::resource_value::ResourceValue, rest: &value::restriction::ResourceRestriction) -> &mut Self {
+    pub fn cost(
+        &mut self,
+        resource_value: &value::resource_value::ResourceValue,
+        rest: &value::restriction::ResourceRestriction,
+    ) -> &mut Self {
         self.performance
             .fresh(&self.product.per_day, resource_value, rest, self.mode);
         self

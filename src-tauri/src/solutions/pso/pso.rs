@@ -1,4 +1,8 @@
-use crate::{dataset, node::meta::{self, PerformanceMode}, value};
+use crate::{
+    dataset,
+    node::meta::{self, PerformanceMode},
+    value,
+};
 
 use super::pso_coef::*;
 use std::{fmt::Debug, rc::Rc};
@@ -10,7 +14,12 @@ pub trait PsoSupport {
         rest: &value::restriction::ResourceRestriction,
     );
     fn get_performance(&self) -> f64;
-    fn change_position(&mut self, new_position: [f64; 29], resv: &value::resource_value::ResourceValue, rest: &value::restriction::ResourceRestriction);
+    fn change_position(
+        &mut self,
+        new_position: [f64; 29],
+        resv: &value::resource_value::ResourceValue,
+        rest: &value::restriction::ResourceRestriction,
+    );
     fn get_position(&self) -> [f64; 29];
 }
 
@@ -50,7 +59,7 @@ where
         global: &[f64; 29],
         vmax: &f64,
         resv: &value::resource_value::ResourceValue,
-        rest: &value::restriction::ResourceRestriction
+        rest: &value::restriction::ResourceRestriction,
     ) -> &mut Self {
         let mut vp = [0.0; 29];
         for i in 0..29 {
@@ -112,7 +121,11 @@ pub struct DataNode {
 }
 
 impl DataNode {
-    pub fn new(position: [u8; 29], ptr: Rc<dataset::ResearchDataCollection>, mode: PerformanceMode) -> DataNode {
+    pub fn new(
+        position: [u8; 29],
+        ptr: Rc<dataset::ResearchDataCollection>,
+        mode: PerformanceMode,
+    ) -> DataNode {
         DataNode {
             position,
             data: meta::MetaData::empty(ptr, mode),
@@ -183,7 +196,12 @@ impl PsoSupport for DataNode {
         res
     }
 
-    fn change_position(&mut self, new_position: [f64; 29], resv: &value::resource_value::ResourceValue, rest: &value::restriction::ResourceRestriction) {
+    fn change_position(
+        &mut self,
+        new_position: [f64; 29],
+        resv: &value::resource_value::ResourceValue,
+        rest: &value::restriction::ResourceRestriction,
+    ) {
         let mut res = [0u8; 29];
         for i in 0..29 {
             let mut h = (new_position[i] * 29.0) as u8;
@@ -197,7 +215,15 @@ impl PsoSupport for DataNode {
         self.position = Self::vaildary(&res);
         let dpr = Rc::clone(&self.data.rate.data_ptr);
         let md = self.data.mode.clone();
-        self.data = meta::MetaData::new(self.position, dpr, resv, rest, md);
+        self.data = meta::MetaData::new(
+            self.position,
+            dpr,
+            resv.rate_factor,
+            resv.source_rate_factor_ssr,
+            resv.source_rate_factor_ur,
+            &rest.select,
+            md,
+        );
     }
 }
 
@@ -234,8 +260,12 @@ impl PsoHandler {
         let mut ps = dataset::PROJECT_ID.clone();
         for _ in 0..node_amo {
             fastrand::shuffle(&mut ps);
-            v.push(PsoNode::new(DataNode::new(ps.clone(), Rc::clone(&data_ptr), mode)))
-        };
+            v.push(PsoNode::new(DataNode::new(
+                ps.clone(),
+                Rc::clone(&data_ptr),
+                mode,
+            )))
+        }
         let gb = v[0].clone();
         PsoHandler {
             nodes: v,
@@ -256,7 +286,15 @@ impl PsoHandler {
             let ine = self.inertia.get(i).unwrap();
             let mut best_this = self.global_best.clone();
             for node in self.nodes.iter_mut() {
-                node.mv_pso(&self.acc1, &self.acc2, &ine, &self.global_best.best, &self.vmax, &self.resource_value, &self.restriction);
+                node.mv_pso(
+                    &self.acc1,
+                    &self.acc2,
+                    &ine,
+                    &self.global_best.best,
+                    &self.vmax,
+                    &self.resource_value,
+                    &self.restriction,
+                );
                 let perf = node.get_performance(&self.resource_value, &self.restriction);
                 // println!("====\n{}, {}\n{:?}\n====", perf, node.best_performance(), node.data.position);
                 if perf > node.best_performance() {
