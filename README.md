@@ -33,7 +33,7 @@ V3 为重构后的科研规划 APP，算法采用原生 Rust 并使用 Tauri，�
 
 ### 百度网盘
 
-链接: https://pan.baidu.com/s/1TcdIOk-sF6g-zPJaOYEg2Q?pwd=t5y8 提取码: t5y8
+链接: https://pan.baidu.com/s/1j9EbvhUEmjZRFLBLom96KQ?pwd=vg4h 提取码: vg4h
 
 ### GitHub Release
 
