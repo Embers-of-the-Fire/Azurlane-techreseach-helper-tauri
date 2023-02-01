@@ -22,6 +22,12 @@
       },
       "path": {
         "all": true
+      },
+      "clipboard": {
+        "writeText": true
+      },
+      "dialog": {
+        "open": true
       }
     },
     "bundle": {

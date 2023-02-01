@@ -1,7 +1,16 @@
-# Tech V3 App
+# Tauri + AzurLane Tech Research Helper 碧蓝航线科研规划器 V3
 
 > 链接:  
 <https://pan.baidu.com/s/1gdTzn-3EOqdhZ6B_wRRp4A?pwd=q4p2> 提取码: q4p2 复制这段内容后打开百度网盘手机App，操作更方便哦
+
+## 前言
+
+### 关于V3和V1
+
+V3为重构后的科研规划APP，算法采用原生Rust并使用Tauri，不再进行WASM支持，从而不再支持Web端使用。如果想要通过Web端使用，请参考[该仓库][wasm-version]中的WASM版或前往我的[GitHub Page][github-page]。
+
+[wasm-version]: https://github.com/Embers-of-the-Fire/AzurLane-Tech-Research-Helper
+[github-page]: https://embers-of-the-fire.github.io/
 
 ## 如何使用
 
