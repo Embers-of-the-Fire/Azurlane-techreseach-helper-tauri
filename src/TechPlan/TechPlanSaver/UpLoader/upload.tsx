@@ -61,7 +61,7 @@ class UploadSelector extends React.Component<Props, State> {
                         />
                     </p>
                     <p className="drag-text">
-                        点击选择文件上传或拖动文件到该页面
+                        拖动文件到该页面以上传
                     </p>
                     {/* <p className="drag-hint">
                         出于运行安全考虑，暂时仅支持桌面文件
