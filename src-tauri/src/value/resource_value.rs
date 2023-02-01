@@ -61,9 +61,9 @@ impl ResourceValue {
                     (ssr_ship + ur_ship) as f64
                 }
                 / if former_ship + ssr_ship + ur_ship == 21 {
-                    16.0
+                    10.0
                 } else {
-                    (16 - former_ship) as f64
+                    (10 - former_ship) as f64
                 },
             source_rate_factor_ssr: if ssr_ship + ur_ship == 5 {
                 0.6
@@ -117,9 +117,9 @@ impl ResourceValue {
                     (ssr_ship + ur_ship) as f64
                 }
                 / if former_ship + ssr_ship + ur_ship == 21 {
-                    16.0
+                    10.0
                 } else {
-                    (16 - former_ship) as f64
+                    (10 - former_ship) as f64
                 },
             source_rate_factor_ssr: if ssr_ship + ur_ship == 5 {
                 0.6

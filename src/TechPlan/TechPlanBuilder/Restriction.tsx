@@ -742,9 +742,9 @@ class Restriction extends React.Component<{}, State> {
                 <Space.Compact block>
                     <InputNumber
                         style={{ width: "100%" }}
-                        addonBefore="2-4期科研船毕业数量"
+                        addonBefore="3-4期科研船毕业数量"
                         min={0}
-                        max={16}
+                        max={10}
                         defaultValue={10}
                         step={1}
                         value={this.state.finished_former_ship}
