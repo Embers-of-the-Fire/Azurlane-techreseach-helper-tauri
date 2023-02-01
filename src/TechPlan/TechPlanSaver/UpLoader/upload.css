@@ -1,0 +1,20 @@
+#upload-dragger {
+    border: 1px dashed #d9d9d9;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    transition: border-color 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-dragger:hover {
+    border-color: #4096ff;
+}
+
+#upload-dragger .drag-text {
+    font-size: larger;
+    font-weight: bold;
+}

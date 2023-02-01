@@ -1,0 +1,62 @@
+.pmetaref .row {
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    width: "100%";
+    min-height: 1.3em;
+}
+
+.pmetaref .row .desc {
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+    padding: 12px 20px;
+    text-align: start;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.88);
+    font-weight: normal;
+    display: table-cell;
+    max-width: "50%";
+    transition: 0.25s;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.pmetaref .row .value {
+    border-inline-end: none;
+    padding: 12px 20px;
+    color: rgba(0, 0, 0, 0.88);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: table-cell;
+    min-width: "50%";
+}
+
+.pmetarest .row {
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    width: "100%";
+    min-height: 1.3em;
+}
+
+.pmetarest .row .desc {
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+    padding: 12px 20px;
+    text-align: start;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.88);
+    font-weight: normal;
+    display: table-cell;
+    max-width: "30%";
+    transition: 0.25s;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.pmetarest .row .value {
+    border-inline-end: none;
+    padding: 12px 20px;
+    color: rgba(0, 0, 0, 0.88);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: table-cell;
+    min-width: "20%";
+}
+
+.pmetarest .row :nth-child(2) {
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+}
+
