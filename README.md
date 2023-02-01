@@ -12,9 +12,9 @@ V3为重构后的科研规划APP，算法采用原生Rust并使用Tauri，不再
 [wasm-version]: https://github.com/Embers-of-the-Fire/AzurLane-Tech-Research-Helper
 [github-page]: https://embers-of-the-fire.github.io/
 
-## 如何使用
+### 后续
 
-点击左下角问号按钮查看帮助
+如果后续仍然存在问题，欢迎通过任何联系方式进行报告。但是无论V3与V1均只会进行Bug的修正，而不会进行进一步再开发。
 
 ## 本地编译
 
