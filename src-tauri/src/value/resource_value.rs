@@ -60,7 +60,7 @@ impl ResourceValue {
                 } else {
                     (ssr_ship + ur_ship) as f64
                 }
-                / if former_ship + ssr_ship + ur_ship == 21 {
+                / if former_ship + ssr_ship + ur_ship == 15 {
                     10.0
                 } else {
                     (10 - former_ship) as f64
@@ -116,7 +116,7 @@ impl ResourceValue {
                 } else {
                     (ssr_ship + ur_ship) as f64
                 }
-                / if former_ship + ssr_ship + ur_ship == 21 {
+                / if former_ship + ssr_ship + ur_ship == 15 {
                     10.0
                 } else {
                     (10 - former_ship) as f64

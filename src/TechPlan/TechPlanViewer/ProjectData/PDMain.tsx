@@ -47,7 +47,7 @@ const form_factor = (ssr: number, ur: number, former: number): {typ: number, ssr
     let fct = 5.0;
     if (ssr + ur !== 5) fct = 5 - ssr - ur;
     let ffm = 10.0;
-    if (ssr + ur + former !== 21) ffm = 10 - former;
+    if (ssr + ur + former !== 15.0) ffm = 10 - former;
     let typical = (4.0 * fct) / ffm;
     let ssrf = 0.6;
     if (ssr + ur !== 5) ssrf = (3 - ssr) / (5 - ssr - ur);

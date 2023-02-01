@@ -164,7 +164,7 @@ impl MetaData {
     pub fn empty(ptr: Rc<dataset::ResearchDataCollection>, mode: PerformanceMode) -> MetaData {
         MetaData {
             product: product::ProductMeta::new(PROJECT_ID, Rc::clone(&ptr)),
-            rate: rate::RateMeta::new(PROJECT_ID, Rc::clone(&ptr), 1.0, 1.0, 1.0, &1),
+            rate: rate::RateMeta::new(PROJECT_ID, Rc::clone(&ptr), 1.0, 0.2, 0.2, &1),
             performance: Metaperformance::empty(mode),
             mode: PerformanceMode::PureIncome,
         }

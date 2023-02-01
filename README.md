@@ -29,6 +29,22 @@ V3 为重构后的科研规划 APP，算法采用原生 Rust 并使用 Tauri，�
 
 如果后续仍然存在问题，欢迎通过任何联系方式进行报告。但是无论 V3 与 V1 均只会进行 Bug 的修正，而不会进行进一步再开发。
 
+## 下载
+
+### 百度网盘
+
+链接: https://pan.baidu.com/s/1TcdIOk-sF6g-zPJaOYEg2Q?pwd=t5y8 提取码: t5y8
+
+### GitHub Release
+
+> 内地访问存在可能的DNS污染等干扰，无法打开请尝试使用Steam++等反代或从下方Gitee处获取
+
+[GitHub Release](https://github.com/Embers-of-the-Fire/Azurlane-techreseach-helper-tauri/releases/tag/main)
+
+### Gitee Release
+
+[Gitee Release](https://gitee.com/embers-of-the-fire/Azurlane-techreseach-helper-tauri/releases/tag/v0.3.0)
+
 ## 本地编译
 
 首先你需要安装[Nodejs](https://nodejs.org/)与[Rust](https://rust-lang.org)，并确认两个包管理器`npm`与`cargo`可以正常使用。
