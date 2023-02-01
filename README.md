@@ -1,20 +1,33 @@
-# Tauri + AzurLane Tech Research Helper 碧蓝航线科研规划器 V3
+<h1>Tauri + AzurLane Tech Research Helper 碧蓝航线科研规划器 V3</h1>
 
-> 链接:  
-<https://pan.baidu.com/s/1gdTzn-3EOqdhZ6B_wRRp4A?pwd=q4p2> 提取码: q4p2 复制这段内容后打开百度网盘手机App，操作更方便哦
+<p>
+<a href="https://space.bilibili.com/526159315"><img src="https://img.shields.io/badge/Author-%E7%BB%9F%E5%90%88%E9%83%A825000mm%E8%A3%85%E7%94%B2%E9%99%84%E7%94%B2(526159315)-blue"></a>
+<img alt="GitHub" src="https://img.shields.io/github/license/Embers-of-the-Fire/Azurlane-techreseach-helper-tauri?color=yellow">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Embers-of-the-Fire/Azurlane-techreseach-helper-tauri?color=green">
+</p>
+
+-   Source Repo: [AzurLane Tech Research Helper][source-repo]
+-   源库：[碧蓝航线科研规划器][source-repo]
+
+This is the cross-platform offline version of [_AzurLane Tech Research Helper_][source-repo], which based on the [_Tauri_][tauri] to make it compatible offline on multiple platforms.
+
+这是[_碧蓝航线科研规划器_][source-repo]的跨平台离线版本，基于[_Tauri_][tauri]。
+
+[source-repo]: https://github.com/Embers-of-the-Fire/AzurLane-Tech-Research-Helper
+[tauri]: https://tauri.app/
 
 ## 前言
 
-### 关于V3和V1
+### 关于 V3 和 V1
 
-V3为重构后的科研规划APP，算法采用原生Rust并使用Tauri，不再进行WASM支持，从而不再支持Web端使用。如果想要通过Web端使用，请参考[该仓库][wasm-version]中的WASM版或前往我的[GitHub Page][github-page]。
+V3 为重构后的科研规划 APP，算法采用原生 Rust 并使用 Tauri，不再进行 WASM 支持，从而不再支持 Web 端使用。如果想要通过 Web 端使用，请参考[该仓库][wasm-version]中的 WASM 版或前往我的[GitHub Page][github-page]。
 
 [wasm-version]: https://github.com/Embers-of-the-Fire/AzurLane-Tech-Research-Helper
 [github-page]: https://embers-of-the-fire.github.io/
 
 ### 后续
 
-如果后续仍然存在问题，欢迎通过任何联系方式进行报告。但是无论V3与V1均只会进行Bug的修正，而不会进行进一步再开发。
+如果后续仍然存在问题，欢迎通过任何联系方式进行报告。但是无论 V3 与 V1 均只会进行 Bug 的修正，而不会进行进一步再开发。
 
 ## 本地编译
 
