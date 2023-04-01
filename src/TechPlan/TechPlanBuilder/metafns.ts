@@ -1,4 +1,4 @@
-import { ResProps } from "./Result/Res/res/fns";
+// import { ResProps } from "./Result/Res/res/fns";
 
 interface MetaData {
     generation: number;

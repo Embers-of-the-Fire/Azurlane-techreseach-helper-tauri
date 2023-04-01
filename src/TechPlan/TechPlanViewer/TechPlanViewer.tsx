@@ -110,9 +110,10 @@ class TechPlanViewer extends React.Component<Props, State> implements MainPage {
                     width: "100%",
                     display: "flex",
                     flexDirection: "row",
+                    padding: "15px"
                 }}
             >
-                <div style={{ height: "100%", width: "15%", padding: "5px" }}>
+                <div style={{ height: "100%", width: "15%", paddingRight: "10px" }}>
                     <ProjectList
                         titles={this.state.data.reduce(
                             (prev: string[], cur) => {
@@ -124,7 +125,7 @@ class TechPlanViewer extends React.Component<Props, State> implements MainPage {
                         onSelect={this.projSelect}
                     />
                 </div>
-                <div style={{ height: "100%", width: "85%", padding: "5px" }}>
+                <div style={{ height: "100%", width: "85%" }}>
                     <PDMain
                         metadata={this.state.nowShowing.meta}
                         result={this.state.nowShowing.daily}

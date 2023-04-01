@@ -21,13 +21,17 @@ interface Props {
 class Result extends React.Component<Props> {
     render() {
         return (
-            <div style={{ height: "100%", width: "100%" }}>
+            <div
+                style={{ height: "100%", width: "100%" }}
+            >
                 <Row style={{ height: "100%", width: "100%" }}>
                     <Col
+                className="tpb-header"
                         span={12}
                         style={{
                             height: "100%",
-                            padding: "25px",
+                            // padding: "25px",
+                            paddingLeft: "25px",
                             paddingRight: "60px",
                             display: "flex",
                             flexDirection: "column",

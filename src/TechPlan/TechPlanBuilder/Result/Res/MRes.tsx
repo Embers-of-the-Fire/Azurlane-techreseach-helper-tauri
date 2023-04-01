@@ -18,9 +18,10 @@ class MRes extends React.Component<Props> {
     render() {
         return (
             <div
+                className="tpb-header"
                 style={{
                     height: "100%",
-                    padding: "25px",
+                    // padding: "25px",
                     display: "flex",
                     flexDirection: "column",
                 }}

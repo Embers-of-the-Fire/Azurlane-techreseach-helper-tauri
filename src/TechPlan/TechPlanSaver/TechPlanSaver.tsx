@@ -435,7 +435,7 @@ class TechPlanSaver extends React.Component<Props, State> implements MainPage {
     render(): React.ReactNode {
         return (
             <div style={this.props.style}>
-                <div style={{ height: "50%", width: "100%", padding: "10px" }}>
+                <div style={{ height: "60%", width: "100%", padding: "10px", paddingTop: 0 }}>
                     <Saver
                         style={{ height: "100%", width: "100%" }}
                         onSave={(s: "json" | "xlsx" | "clipboard") =>
@@ -457,7 +457,7 @@ class TechPlanSaver extends React.Component<Props, State> implements MainPage {
                         text={this.state.ctc.text}
                     />
                 </div>
-                <div style={{ height: "50%", width: "100%", padding: "10px" }}>
+                <div style={{ height: "40%", width: "100%", padding: "10px" }}>
                     <Uploader
                         ref={this.uploader_ref}
                         onUpload={(v) => this.upload(v)}

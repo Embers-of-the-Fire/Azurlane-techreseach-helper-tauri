@@ -74,15 +74,15 @@ class PDataMainShower extends React.Component<Props, State> {
                         ]}
                         onChange={(v) => this.segChange(v)}
                     />
-                    <div style={{ flexGrow: 1 }}>
+                    <div style={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
                         <MetaShower
                             metaData={this.props.metadata}
                             style={{
                                 width: "100%",
-                                height: "100%",
+                                overflowY: "auto",
                                 display:
                                     this.state.segmented === "meta"
-                                        ? "flex"
+                                        ? ""
                                         : "none",
                             }}
                         />

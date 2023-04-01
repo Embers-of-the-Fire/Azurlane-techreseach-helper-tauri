@@ -128,11 +128,11 @@ class PDMain extends React.Component<Props, State> {
     }
     render(): React.ReactNode {
         return (
-            <div style={{ width: "100%", height: "100%" }}>
+            <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
                 <Paragraph
                     style={{
                         width: "100%",
-                        height: "10%",
+                        height: "12.5%",
                         display: "flex",
                         flexDirection: "row",
                     }}
@@ -150,7 +150,7 @@ class PDMain extends React.Component<Props, State> {
                 <div
                     style={{
                         width: "100%",
-                        height: "calc(90% - 1em)",
+                        height: "88.5%",
                         display: "flex",
                         flexDirection: "row",
                     }}
@@ -203,7 +203,7 @@ class PDMain extends React.Component<Props, State> {
                             // series={form_dataset_series(this.props.dataset)}
                             metadata={this.props.metadata}
                             dataset={this.state.dataset}
-                            style={{ width: "100%", height: "100%" }}
+                            style={{ width: "100%", height: "100%", display: "flex" }}
                         />
                     </div>
                 </div>

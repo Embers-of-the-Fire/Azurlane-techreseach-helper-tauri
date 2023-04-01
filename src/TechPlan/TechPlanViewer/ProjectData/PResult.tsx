@@ -143,7 +143,6 @@ class PResult extends React.Component<Props, State> {
                         border: "1px solid rgba(5, 5, 5, 0.06)",
                         borderRadius: "8px",
                         height: "100%",
-                        width: "100%",
                     }}
                 >
                     <table style={{ width: "100%", height: "100%" }}>

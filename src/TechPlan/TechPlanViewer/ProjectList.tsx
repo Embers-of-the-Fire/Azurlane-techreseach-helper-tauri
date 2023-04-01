@@ -17,7 +17,7 @@ const GridStyle: React.CSSProperties = {
 class ProjectList extends React.Component<Props> {
     render(): React.ReactNode {
         return (
-            <Card style={{ height: "100%", width: "100%", padding: "15px", overflowY: "auto" }}>
+            <Card style={{ height: "100%", width: "100%", overflowY: "auto" }}>
                 { this.props.titles.map((title, idx) => <Card.Grid onClick={() => this.props.onSelect(idx)} key={idx} style={GridStyle}>{title}</Card.Grid>) }
             </Card>
         )

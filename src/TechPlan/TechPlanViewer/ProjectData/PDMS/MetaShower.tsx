@@ -17,20 +17,24 @@ const showRest = (v: Rest): string => {
 class MetaShower extends React.Component<Props> {
     render(): React.ReactNode {
         return (
-            <div style={this.props.style}>
+            <div
+                style={{
+                    ...this.props.style,
+                }}
+            >
                 <div
                     style={{
                         display: "flex",
                         flexDirection: "row",
                         width: "100%",
-                        height: "100%",
                     }}
                 >
                     <div
                         style={{
                             width: "40%",
-                            height: "100%",
                             padding: "1em 10px 0 10px",
+                            display: "flex",
+                            flexDirection: "column",
                         }}
                     >
                         <div style={{ height: "1.5em", marginBottom: "0.8em" }}>
@@ -47,8 +51,7 @@ class MetaShower extends React.Component<Props> {
                             className="pmetaref"
                             style={{
                                 width: "100%",
-                                height: "calc(100% - 2.3em)",
-                                overflowY: "auto",
+                                flex: 1,
                                 border: "1px solid rgba(5, 5, 5, 0.06)",
                                 borderRadius: "8px",
                             }}
@@ -148,6 +151,8 @@ class MetaShower extends React.Component<Props> {
                             width: "60%",
                             height: "100%",
                             padding: "1em 10px 0 10px",
+                            display: "flex",
+                            flexDirection: "column",
                         }}
                     >
                         <div style={{ height: "1.5em", marginBottom: "0.8em" }}>
@@ -164,8 +169,7 @@ class MetaShower extends React.Component<Props> {
                             className="pmetarest"
                             style={{
                                 width: "100%",
-                                height: "calc(100% - 2.3em)",
-                                overflowY: "auto",
+                                flex: 1,
                                 border: "1px solid rgba(5, 5, 5, 0.06)",
                                 borderRadius: "8px",
                             }}

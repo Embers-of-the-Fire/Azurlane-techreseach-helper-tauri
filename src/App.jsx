@@ -112,19 +112,6 @@ class App extends React.Component {
                             position: "absolute",
                         }}
                     >
-                        <Layout.Header className="mainHeader">
-                            <div
-                                className="logo"
-                                style={{ width: "5%", float: "left" }}
-                            />
-                            <Menu
-                                style={{ width: "75%" }}
-                                theme="dark"
-                                mode="horizontal"
-                                defaultSelectedKeys={["1"]}
-                                items={[{ key: "1", label: "首页" }]}
-                            />
-                        </Layout.Header>
                         <Layout>
                             <Layout.Sider width={160}>
                                 <Menu
@@ -136,8 +123,12 @@ class App extends React.Component {
                                     onClick={(data) => this.page(data)}
                                 />
                             </Layout.Sider>
-                            <Layout style={{ padding: 35, paddingTop: 45 }}>
+                            <Layout
+                                id="mainContent"
+                                // style={{ padding: 35, paddingTop: 45 }}
+                            >
                                 <Breadcrumb
+                                    id="breadCrumb"
                                     style={{ marginBottom: 15, marginTop: -15 }}
                                 >
                                     <Breadcrumb.Item>
@@ -147,8 +138,7 @@ class App extends React.Component {
                                 </Breadcrumb>
                                 <Layout.Content
                                     style={{
-                                        padding: 30,
-                                        margin: 0,
+                                        padding: 20,
                                         minHeight: 280,
                                         background: "white",
                                     }}
@@ -167,25 +157,45 @@ class App extends React.Component {
                                     </div>
                                 </Layout.Content>
                                 <Layout.Footer
+                                    id="mainFooter"
                                     style={{
                                         textAlign: "center",
-                                        marginBottom: "-25px",
                                     }}
                                 >
-                                    UI Supported By{" "}
-                                    <a href="https://ant.design">Ant Design</a>
-                                    <br />
-                                    App Supported By{" "}
-                                    <a href="https://tauri.app/">Tauri</a>
-                                    <br />
-                                    Authored By{" "}
-                                    <a href="https://github.com/Embers-of-the-Fire/">
-                                        Embers-of-the-Fire(GitHub)
-                                    </a>{" "}
-                                    -{" "}
-                                    <a href="https://space.bilibili.com/526159315">
-                                        统合部25000mm装甲附甲(BiliBili)
-                                    </a>
+                                    <div id="bottom-content-multi">
+                                        UI Supported By{" "}
+                                        <a href="https://ant.design">
+                                            Ant Design
+                                        </a>
+                                        <br />
+                                        App Supported By{" "}
+                                        <a href="https://tauri.app/">Tauri</a>
+                                        <br />
+                                        Authored By{" "}
+                                        <a href="https://github.com/Embers-of-the-Fire/">
+                                            Embers-of-the-Fire(GitHub)
+                                        </a>{" "}
+                                        -{" "}
+                                        <a href="https://space.bilibili.com/526159315">
+                                            统合部25000mm装甲附甲(BiliBili)
+                                        </a>
+                                    </div>
+                                    <div id="bottom-content-single">
+                                        UI Supported By{" "}
+                                        <a href="https://ant.design">
+                                            Ant Design
+                                        </a>
+                                        |App Supported By{" "}
+                                        <a href="https://tauri.app/">Tauri</a>
+                                        |Authored By{" "}
+                                        <a href="https://github.com/Embers-of-the-Fire/">
+                                            Embers-of-the-Fire(GitHub)
+                                        </a>{" "}
+                                        -{" "}
+                                        <a href="https://space.bilibili.com/526159315">
+                                            统合部25000mm装甲附甲(BiliBili)
+                                        </a>
+                                    </div>
                                 </Layout.Footer>
                             </Layout>
                         </Layout>

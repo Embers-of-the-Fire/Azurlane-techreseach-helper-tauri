@@ -6,6 +6,7 @@ pub const PROJECT_NAME: [&str; 29] = ["魔方解析1h", "魔方解析2h", "魔�
 
 pub const NONE_DIRECT_BLP: [u8; 2] = [3, 4];
 
+#[inline]
 fn is_direct_blp(d: u8) -> bool {
     return NONE_DIRECT_BLP.contains(&d);
 }
@@ -21,18 +22,22 @@ fn cvt_str2u8(proj_type: &str) -> u8 {
     panic!("Invalid project type: {}", proj_type);
 }
 
+#[inline]
 fn is_ssr(proj_type: u8) -> bool {
     proj_type == 3
 }
 
+#[inline]
 fn is_ur(proj_type: u8) -> bool {
     proj_type == 4
 }
 
+#[inline]
 fn is_data_collection(proj_type: u8) -> bool {
     proj_type == 8 || proj_type == 9
 }
 
+#[inline]
 fn is_research_assignment(proj_type: u8) -> bool {
     proj_type == 11
 }
@@ -71,23 +76,27 @@ impl ResearchData {
         ResearchData { research_id, proj_type: cvt_str2u8(proj_type), time, rate, doubloon, cube, super_rare_blp, ultra_rare_blp, ultra_rare_equip, cognitive_chips }
     }
     
-    /// 是否为**定向蓝图**
+    #[inline]
     pub fn is_direct_blp(&self) -> bool {
         return is_direct_blp(self.proj_type);
     }
 
+    #[inline]
     pub fn is_data_collection(&self) -> bool {
         return is_data_collection(self.proj_type);
     }
 
+#[inline]
     pub fn is_research_assignment(&self) -> bool {
         return is_research_assignment(self.proj_type);
     }
 
+    #[inline]
     pub fn is_ssr(&self) -> bool {
         return is_ssr(self.proj_type);
     }
 
+    #[inline]
     pub fn is_ur(&self) -> bool {
         return is_ur(self.proj_type);
     }
@@ -147,6 +156,7 @@ impl ResearchDataCollection {
         // ResearchDataCollection{ data: m, len, data_ptr: v }
     }
 
+    #[inline]
     pub fn get_data_by_id(&self, id: usize) -> Option<&ResearchData> {
         self.data.get(id)
     }

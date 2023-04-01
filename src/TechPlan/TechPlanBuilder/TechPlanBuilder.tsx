@@ -26,6 +26,7 @@ import { invoke } from "@tauri-apps/api";
 import { ResProps } from "./Result/Res/res/fns";
 import { MetaData, SaveObj } from "./metafns";
 import { MainPage } from "../MainInterface";
+import './tpb.css'
 
 const { Title } = Typography;
 
@@ -401,11 +402,12 @@ class TechPlanBuilder
                     </Form>
                 </Modal>
                 <div
+                    className="tpb-header"
                     style={{
                         height: "100%",
                         width: "35%",
                         display: "flex",
-                        paddingTop: "25px",
+                        // paddingTop: "25px",
                         flexDirection: "column",
                     }}
                 >
@@ -421,13 +423,9 @@ class TechPlanBuilder
                         }}
                     >
                         <div ref={this.tour.inputReferRef}>
-                            <Title level={4}>参考价值</Title>
                             <ReferenceValue ref={this.refRefer} />
                         </div>
                         <div ref={this.tour.inputRestRef}>
-                            <Title level={4} style={{ marginTop: "20px" }}>
-                                策略限制
-                            </Title>
                             <Restriction ref={this.refRest} />
                         </div>
                     </div>
@@ -435,7 +433,8 @@ class TechPlanBuilder
                         <div
                             style={{
                                 width: "100%",
-                                padding: "0px 35px 10px 35px",
+                                padding: "0px 15px 10px 15px",
+                                textAlign: "center",
                             }}
                         >
                             <Button
@@ -444,8 +443,6 @@ class TechPlanBuilder
                                 style={{
                                     height: "100%",
                                     fontSize: "20px",
-                                    marginLeft: "calc(5% + 10px)",
-                                    marginRight: "15px",
                                 }}
                                 icon={<QuestionCircleTwoTone />}
                                 onClick={() => this.question()}
@@ -462,11 +459,9 @@ class TechPlanBuilder
                                     type="default"
                                     style={{
                                         height: "100%",
-                                        width: "calc(30% - 40px)",
                                         borderWidth: "3px",
                                         fontSize: "20px",
-                                        marginRight: "25px",
-                                        marginLeft: "calc(5% - 25px)",
+                                        marginLeft: "10px",
                                     }}
                                     icon={
                                         <SyncOutlined
@@ -486,11 +481,9 @@ class TechPlanBuilder
                                 ref={this.tour.saveRef}
                                 style={{
                                     height: "100%",
-                                    width: "calc(30% - 40px)",
                                     borderWidth: "3px",
                                     fontSize: "20px",
-                                    marginLeft: "25px",
-                                    marginRight: "calc(5% - 30px)",
+                                    marginLeft: "10px",
                                 }}
                                 icon={
                                     <SaveTwoTone
@@ -512,8 +505,7 @@ class TechPlanBuilder
                                 style={{
                                     height: "100%",
                                     fontSize: "20px",
-                                    marginLeft: "5%",
-                                    marginRight: "15px",
+                                    marginLeft: "10px",
                                 }}
                                 icon={<SettingTwoTone twoToneColor="#ff4d4f" />}
                                 onClick={() => this.openDrawer()}
