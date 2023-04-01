@@ -60,6 +60,7 @@ class Saver extends React.Component<Props> {
                                         height: "100%",
                                         fontSize: "20px",
                                         borderWidth: "3px",
+                                        textAlign: "center",
                                     }}
                                     onClick={() => this.props.onSave("json")}
                                 >
@@ -79,6 +80,7 @@ class Saver extends React.Component<Props> {
                                     height: "100%",
                                     fontSize: "20px",
                                     borderWidth: "3px",
+                                    textAlign: "center",
                                 }}
                                 onClick={() => this.props.onSave("xlsx")}
                             >
@@ -86,7 +88,7 @@ class Saver extends React.Component<Props> {
                                     style={{ fontSize: "35px" }}
                                 />
                                 <br />
-                                <span>另存为EXCEL</span>
+                                <span>EXCEL</span>
                             </Button>
                         </div>
                         <div style={{ width: "100%", height: "calc(33.33% - 10px)" }}>
@@ -96,6 +98,7 @@ class Saver extends React.Component<Props> {
                                     height: "100%",
                                     fontSize: "20px",
                                     borderWidth: "3px",
+                                    textAlign: "center",
                                 }}
                                 onClick={() => this.props.onSave("clipboard")}
                             >
@@ -103,7 +106,7 @@ class Saver extends React.Component<Props> {
                                     style={{ fontSize: "35px" }}
                                 />
                                 <br />
-                                <span>复制到剪贴板</span>
+                                <span>剪贴板</span>
                             </Button>
                         </div>
                     </div>
